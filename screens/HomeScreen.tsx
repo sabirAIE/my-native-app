@@ -3,39 +3,51 @@ import { View,Text,Button, StyleSheet, FlatList} from "react-native";
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import data from "../data.json";
 import { Workout } from '../types/data';
+import WorkoutItem from '../components/WorkoutItem';
+import useCachedResources from '../hooks/useCachedResources';
+import { StatusBar } from 'expo-status-bar';
+import { HubballiFontComponent } from '../components/styledComponents/HubballiFontComponent';
 
 
 export default function HomeScreen({navigation}: NativeStackHeaderProps){
+    
+    const isLoaded = useCachedResources();
+    console.log(isLoaded);
 
-    const renderWorkoutList = ({item}:{item: Workout})=>{
+    if(isLoaded){
         return(
-            <View>
-                <Text>
-                    {item.name + '--'+ item.duration}
-                </Text>
 
+            <View style={styles.container}>
+                <Text style={styles.header}>Workouts</Text>
+                    <HubballiFontComponent style={{fontSize:20}}>
+                        New Styled Font
+                    </HubballiFontComponent>
+                <FlatList
+                    data={data as Workout[]}
+                    renderItem={WorkoutItem}
+                    keyExtractor={(item)=>item.slug}
+                />
+                
             </View>
+    
+        );
+    }else{
+        return(
+            <StatusBar/>
         )
     }
-    
-    return(
-
-        <View style={styles.container}>
-            
-            <FlatList
-                data={data as Workout[]}
-                renderItem={renderWorkoutList}
-                keyExtractor={(item)=>item.slug}
-            />
-            
-        </View>
-
-    );
 }
 
 const styles = StyleSheet.create({
     container:{
         padding: 20,
-        backgroundColor:'#fff000',
+        backgroundColor:'#ffff43',
+        flex:1
+    },
+
+    header:{
+        fontSize:20,
+        marginBottom:20,
+        fontWeight:'bold',
     }
 })

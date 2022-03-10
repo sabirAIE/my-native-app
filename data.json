@@ -107,5 +107,228 @@
           "duration": 10
         }
       ]
-    }
+    },
+    {
+      "slug": "easy-arm-workout-12y5278",
+      "name": "Easy Arm Workout",
+      "duration": 240,
+      "difficulty": "medium",
+      "sequence": [
+        {
+          "slug": "pushups-4876812",
+          "name": "Pushups",
+          "type": "exercise",
+          "reps": 15,
+          "duration": 60
+        },
+        {
+          "slug": "lower-back-stretch-12478712",
+          "name": "Lower back stretch",
+          "type": "stretch",
+          "duration": 120
+        },
+        {
+          "slug": "pull-ups-123214221",
+          "name": "Pull Ups",
+          "type": "exercise",
+          "reps": 10,
+          "duration": 60
+        }
+      ]
+    },
+    {
+      "slug": "easy-arm-workout-12555317278",
+      "name": "Easy Arm Workout",
+      "duration": 240,
+      "difficulty": "medium",
+      "sequence": [
+        {
+          "slug": "pushups-4876812",
+          "name": "Pushups",
+          "type": "exercise",
+          "reps": 15,
+          "duration": 60
+        },
+        {
+          "slug": "lower-back-stretch-12478712",
+          "name": "Lower back stretch",
+          "type": "stretch",
+          "duration": 120
+        },
+        {
+          "slug": "pull-ups-123214221",
+          "name": "Pull Ups",
+          "type": "exercise",
+          "reps": 10,
+          "duration": 60
+        }
+      ]
+    },
+    {
+      "slug": "easy-arm-workout-123144278",
+      "name": "Easy Arm Workout",
+      "duration": 240,
+      "difficulty": "medium",
+      "sequence": [
+        {
+          "slug": "pushups-4876812",
+          "name": "Pushups",
+          "type": "exercise",
+          "reps": 15,
+          "duration": 60
+        },
+        {
+          "slug": "lower-back-stretch-12478712",
+          "name": "Lower back stretch",
+          "type": "stretch",
+          "duration": 120
+        },
+        {
+          "slug": "pull-ups-123214221",
+          "name": "Pull Ups",
+          "type": "exercise",
+          "reps": 10,
+          "duration": 60
+        }
+      ]
+    },
+    {
+      "slug": "easy-arm-workout-12317548",
+      "name": "Easy Arm Workout",
+      "duration": 240,
+      "difficulty": "medium",
+      "sequence": [
+        {
+          "slug": "pushups-4876812",
+          "name": "Pushups",
+          "type": "exercise",
+          "reps": 15,
+          "duration": 60
+        },
+        {
+          "slug": "lower-back-stretch-12478712",
+          "name": "Lower back stretch",
+          "type": "stretch",
+          "duration": 120
+        },
+        {
+          "slug": "pull-ups-123214221",
+          "name": "Pull Ups",
+          "type": "exercise",
+          "reps": 10,
+          "duration": 60
+        }
+      ]
+    },
+    {
+      "slug": "easy-arm-workout-123517278",
+      "name": "Easy Arm Workout",
+      "duration": 240,
+      "difficulty": "medium",
+      "sequence": [
+        {
+          "slug": "pushups-4876812",
+          "name": "Pushups",
+          "type": "exercise",
+          "reps": 15,
+          "duration": 60
+        },
+        {
+          "slug": "lower-back-stretch-12478712",
+          "name": "Lower back stretch",
+          "type": "stretch",
+          "duration": 120
+        },
+        {
+          "slug": "pull-ups-123214221",
+          "name": "Pull Ups",
+          "type": "exercise",
+          "reps": 10,
+          "duration": 60
+        }
+      ]
+    },
+    {
+      "slug": "easy-arm-workout-456709",
+      "name": "Easy Arm Workout",
+      "duration": 240,
+      "difficulty": "medium",
+      "sequence": [
+        {
+          "slug": "pushups-4876812",
+          "name": "Pushups",
+          "type": "exercise",
+          "reps": 15,
+          "duration": 60
+        },
+        {
+          "slug": "lower-back-stretch-12478712",
+          "name": "Lower back stretch",
+          "type": "stretch",
+          "duration": 120
+        },
+        {
+          "slug": "pull-ups-123214221",
+          "name": "Pull Ups",
+          "type": "exercise",
+          "reps": 10,
+          "duration": 60
+        }
+      ]
+    },
+    {
+      "slug": "easy-arm-workout-1987657278",
+      "name": "Easy Arm Workout",
+      "duration": 240,
+      "difficulty": "medium",
+      "sequence": [
+        {
+          "slug": "pushups-4876812",
+          "name": "Pushups",
+          "type": "exercise",
+          "reps": 15,
+          "duration": 60
+        },
+        {
+          "slug": "lower-back-stretch-12478712",
+          "name": "Lower back stretch",
+          "type": "stretch",
+          "duration": 120
+        },
+        {
+          "slug": "pull-ups-123214221",
+          "name": "Pull Ups",
+          "type": "exercise",
+          "reps": 10,
+          "duration": 60
+        }
+      ]
+    },{
+      "slug": "easy-arm-workout-165417278",
+      "name": "Easy Arm Workout",
+      "duration": 240,
+      "difficulty": "medium",
+      "sequence": [
+        {
+          "slug": "pushups-4876812",
+          "name": "Pushups",
+          "type": "exercise",
+          "reps": 15,
+          "duration": 60
+        },
+        {
+          "slug": "lower-back-stretch-12478712",
+          "name": "Lower back stretch",
+          "type": "stretch",
+          "duration": 120
+        },
+        {
+          "slug": "pull-ups-123214221",
+          "name": "Pull Ups",
+          "type": "exercise",
+          "reps": 10,
+          "duration": 60
+        }
+      ]
+    },
   ]
