@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import * as Font from "expo-font"
+import { clearWorkoutData, getWorkouts, initWorkouts } from "../storage/workoutData";
 
 export default function useCachedResources(){
 
@@ -9,12 +10,15 @@ export default function useCachedResources(){
     const getFontDataAsync = async ()=>{
         
         try{
+            await initWorkouts();
             await Font.loadAsync({
                 "hubballi":require("../assets/fonts/Hubballi-Regular.ttf")
-            })
-            setIsLoading(true)
+            });
+            
         }catch(e){
             console.warn(e)
+        }finally{
+            setIsLoading(true);
         }
     }
 

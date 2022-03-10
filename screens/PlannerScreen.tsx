@@ -12,11 +12,6 @@ export default function PlannerScreen({navigation}: NativeStackHeaderProps){
 
         <View>
             <Text>Planner Screen</Text>
-            <Button
-                color="#841584"
-                onPress={()=>navigation.push("Test")}
-                title="Test"
-            />
         </View>
 
     );

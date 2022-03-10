@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { Text } from 'react-native';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from "@react-navigation/native"
+
 import HomeScreen from "../screens/HomeScreen";
 import PlannerScreen from "../screens/PlannerScreen";
-import TestScreen from '../screens/TestScreen';
+import WorkoutDetailScreen from '../screens/WorkoutDetailScreen';
 
 export default function Navigation(){
     return(
@@ -29,8 +29,8 @@ function RootNavigator(){
                 }}    
             />
             <Stack.Screen
-                name='Test'
-                component={TestScreen}
+                name='Workout Details'
+                component={WorkoutDetailScreen}
             />
         </Stack.Navigator>
     )
