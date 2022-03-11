@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { View,Text, StyleSheet} from "react-native";
+import { View,Text, StyleSheet, Pressable} from "react-native";
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
-import useCachedResources from '../hooks/useCachedResources';
-import { StatusBar } from 'expo-status-bar';
+import { useWorkoutDetailsBySlug } from '../hooks/useWorkoutDetailsBySlug';
+import { formatSec } from '../utils/TimeUtils';
 
 //type Definations--------------------------
 type DetailsParams = {
@@ -17,13 +17,36 @@ type navigation = NativeStackHeaderProps & DetailsParams
 
 //-----------------------------------------
 
-export default function WorkoutDetailScreen({navigation, route}: navigation){
+export default function WorkoutDetailScreen({navigation, route}: navigation){ 
     
-    
+    const workoutDetails = useWorkoutDetailsBySlug(route.params.slug);
+    console.log(workoutDetails);
+
+    //this will be used to display loading screen;
+    if(!workoutDetails){
+        return null;
+    }
+
     return(
 
         <View style={styles.container}>
-            <Text style={styles.header}>Workout Details-{route.params.slug}</Text>
+
+            {workoutDetails.sequence.map((data,i)=>(
+                <Pressable
+                    style={{padding:20, backgroundColor:'#fff', marginBottom:10}}
+                    key={i}
+                    onPress={()=>alert("hi i am pressed")}
+                >
+                    <Text style={{textTransform:'capitalize', fontWeight:'bold'}}>{data.type}</Text>
+                    <Text>
+                        Exsercise Name: {data.name}
+                    </Text>
+                    <Text>
+                        Reps: {data.reps}, Duration: {formatSec(data.duration)}
+                    </Text>
+                </Pressable>
+            ))}
+            
         </View>
 
     );
