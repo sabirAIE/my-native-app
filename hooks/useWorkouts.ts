@@ -9,7 +9,7 @@ export const useWorkouts = () =>{
     const [workoutData, setWorkOutData] = useState<Workout[]>([]);
     const isFocused = useIsFocused();
 
-    const getWorkoutData = async()=>{
+     const getWorkoutData = async()=>{
         const _data = await getWorkouts();
         setWorkOutData(_data);
     }

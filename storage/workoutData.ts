@@ -1,4 +1,5 @@
 import { containsKey, getData, removeItem, storeData } from ".";
+import {AppRegistry, Platform} from 'react-native';
 import { Workout} from "../types/data";
 import data from "../data.json";
 

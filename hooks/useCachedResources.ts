@@ -10,13 +10,14 @@ export default function useCachedResources(){
     const getFontDataAsync = async ()=>{
         
         try{
+            
             await initWorkouts();
             await Font.loadAsync({
-                "hubballi":require("../assets/fonts/Hubballi-Regular.ttf")
+                "hubballi":require("../assets/fonts/Hubballi-Regular.ttf"),
             });
             
         }catch(e){
-            console.warn(e)
+            console.warn(e);
         }finally{
             setIsLoading(true);
         }
