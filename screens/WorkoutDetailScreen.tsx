@@ -38,6 +38,21 @@ export default function WorkoutDetailScreen({navigation, route}: navigation){
         setTrackerIdx(idx);
     };
 
+    useEffect(()=>{
+
+        console.log(countDown);
+        if(!workoutDetails){
+            return;
+        }
+        
+        if(trackerIdx === workoutDetails.sequence.length-1){
+            return;
+        }
+
+        if(countDown === 0){
+            addItemToSequence(trackerIdx+1)
+        }
+    },[countDown])
 
     //this will be used to display loading screen;
     if(!workoutDetails){
@@ -88,7 +103,7 @@ export default function WorkoutDetailScreen({navigation, route}: navigation){
 
                     </View>
                 </MyModal>
-                <View>
+                <View style={styles.centerView}>
                     {   
                         //when sequence lenght is 0 means Execise is going on, Only then Show the Play Button
                         sequence.length ===0  &&
@@ -98,6 +113,14 @@ export default function WorkoutDetailScreen({navigation, route}: navigation){
                             size={100}
                             onPress={()=> addItemToSequence(0)}
                         />
+                    }
+                    {
+                        sequence.length > 0 && countDown>=0 &&
+                        <View>
+                            <Text style={{fontSize:55}}>
+                                {countDown}
+                            </Text>
+                        </View>
                     }
                 </View>
             </View>
@@ -117,5 +140,11 @@ const styles = StyleSheet.create({
         fontSize:20,
         marginBottom:20,
         fontWeight:'bold',
+    },
+    centerView:{
+        flexDirection:"row",
+        justifyContent:"space-around",
+        alignItems:"center",
+        marginBottom:20,
     }
 })

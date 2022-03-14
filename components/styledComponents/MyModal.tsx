@@ -21,6 +21,7 @@ export function MyModal({activator: Activator, children}: modalProps){
             <Modal
                 visible={visibleModal}
                 animationType="slide"
+                transparent={true}
                 style={styles.modalView}
 
             >

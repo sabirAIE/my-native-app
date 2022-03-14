@@ -14,12 +14,11 @@ export function useCountDown(idx: number, initialCount: number){
         }
 
         intervalRef.current = window.setInterval(()=>{
-            setCoutDown((c)=>{
-                console.log(c);
-                return c-1;
+            setCoutDown((counter)=>{
+                return counter-1;
             });
 
-        }, 20);
+        }, 100);
 
         console.log(intervalRef.current);
         return ()=> cleanUP();
