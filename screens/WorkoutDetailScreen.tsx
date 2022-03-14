@@ -7,6 +7,7 @@ import { MyModal } from '../components/styledComponents/MyModal';
 import { FontAwesome } from '@expo/vector-icons';
 import WorkoutItem from '../components/WorkoutItem';
 import { Sequence } from '../types/data';
+import { useCountDown } from '../hooks/useCountDown';
 
 //type Definations--------------------------
 type DetailsParams = {
@@ -23,12 +24,21 @@ type navigation = NativeStackHeaderProps & DetailsParams
 
 export default function WorkoutDetailScreen({navigation, route}: navigation){ 
 
-    const [sequence, setSequence] = useState<Sequence[]>([]);
     const workoutDetails = useWorkoutDetailsBySlug(route.params.slug);
+    const [sequence, setSequence] = useState<Sequence[]>([]);
+    const [trackerIdx, setTrackerIdx] = useState(-1);
 
-    const addItemToSequence = (idx:number)=>{
+    const countDown = useCountDown(
+        trackerIdx,
+        trackerIdx >=0 ? sequence[trackerIdx].duration: -1
+    );
+
+    const addItemToSequence = (idx: number)=>{
         setSequence([...sequence, workoutDetails!.sequence[idx]]);
-    }
+        setTrackerIdx(idx);
+    };
+
+
     //this will be used to display loading screen;
     if(!workoutDetails){
         return null;
@@ -84,10 +94,11 @@ export default function WorkoutDetailScreen({navigation, route}: navigation){
                         sequence.length ===0  &&
 
                         <FontAwesome
-                        name='play-circle-o'
-                        size={100}
-                        onPress={()=> addItemToSequence(0)}
-                    />}
+                            name='play-circle-o'
+                            size={100}
+                            onPress={()=> addItemToSequence(0)}
+                        />
+                    }
                 </View>
             </View>
         </>

@@ -68,7 +68,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        marginTop:20
+        marginTop:20,
+        overflow:'scroll',
     },
     
     modalView: {
@@ -82,9 +83,10 @@ const styles = StyleSheet.create({
             width: 0,
             height: 2
         },
-        shadowOpacity: 0.25,
+        shadowOpacity: 0.7,
         shadowRadius: 4,
-        elevation: 5
+        elevation: 5,
+        overflow:'scroll',
     },
 
     button: {

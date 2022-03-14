@@ -4,7 +4,9 @@ import { Workout} from "../types/data";
 import data from "../data.json";
 
 
+
 export const getWorkouts = async(): Promise<Workout[]>=>{
+    console.log("getting workout data");
     const workoutData = await getData("workout-data");
     return workoutData;
 }
@@ -20,6 +22,7 @@ export const initWorkouts = async(): Promise<boolean> =>{
     const hasWorkoutKey = await containsKey("workout-data");
             
     if(!hasWorkoutKey){
+        console.log("Saving data");
         await storeData("workout-data", data);
         return true;
     }

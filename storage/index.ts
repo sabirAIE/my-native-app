@@ -31,6 +31,7 @@ export const getData = async (key:string) =>{
     return null;
 }
 
+
 export const containsKey = async (key:string) =>{
     try{
         const keys = await AsyncStorage.getAllKeys();
