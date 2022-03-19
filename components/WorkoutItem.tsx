@@ -7,7 +7,7 @@ export default function WorkoutItem({item}:{item: Workout}){
     return(
         <View style={styles.container}>
             <HubballiFontComponent style={styles.name}>
-                {item.name}--New Styled Font                
+                {item.name}             
             </HubballiFontComponent>
 
             <HubballiFontComponent style={styles.duration}>

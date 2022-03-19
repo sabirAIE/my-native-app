@@ -28,14 +28,13 @@ export default function WorkoutDetailScreen({navigation, route}: navigation){
     const [sequence, setSequence] = useState<Sequence[]>([]);
     const [trackerIdx, setTrackerIdx] = useState(-1);
 
-    const countDown = useCountDown(
-        trackerIdx,
-        trackerIdx >=0 ? sequence[trackerIdx].duration: -1
-    );
+    const {countDown, isRunning, stop, start} = useCountDown(trackerIdx);
 
     const addItemToSequence = (idx: number)=>{
-        setSequence([...sequence, workoutDetails!.sequence[idx]]);
+        const newSequence = [...sequence, workoutDetails!.sequence[idx]] 
+        setSequence(newSequence);
         setTrackerIdx(idx);
+        start(newSequence[idx].duration);
     };
 
     useEffect(()=>{
@@ -53,6 +52,10 @@ export default function WorkoutDetailScreen({navigation, route}: navigation){
             addItemToSequence(trackerIdx+1)
         }
     },[countDown])
+
+
+    const hasReachedEnd = sequence.length === workoutDetails?.sequence.length &&
+        countDown === 0
 
     //this will be used to display loading screen;
     if(!workoutDetails){
@@ -122,6 +125,19 @@ export default function WorkoutDetailScreen({navigation, route}: navigation){
                             </Text>
                         </View>
                     }
+                </View>
+                <View style={{alignItems:'center'}}>
+                    <Text style={{fontSize:50}}>
+                        {
+                            sequence.length ===0?
+                            "Prepare"
+                            :
+                            hasReachedEnd?
+                            "Good Job"
+                            :
+                            sequence[trackerIdx].name
+                        }
+                    </Text>
                 </View>
             </View>
         </>

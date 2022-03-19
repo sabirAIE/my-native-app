@@ -1,28 +1,31 @@
 import { useEffect, useRef, useState } from "react";
 
-export function useCountDown(idx: number, initialCount: number){
+export function useCountDown(idx: number, initialCount: number=-1){
 
     const [countDown, setCoutDown] = useState(initialCount);
+    const [isRunning, setIsRunning] = useState(false);
 
     const intervalRef = useRef<number>();
     
     
     useEffect(()=>{
+
         if(idx === -1){
-            console.log("Returning From counter");
             return;
         }
 
-        intervalRef.current = window.setInterval(()=>{
-            setCoutDown((counter)=>{
-                return counter-1;
-            });
+        if(isRunning && !intervalRef.current){
 
-        }, 100);
-
-        console.log(intervalRef.current);
+            intervalRef.current = window.setInterval(()=>{
+                setCoutDown((counter)=>{
+                    return counter - 1;
+                });
+    
+            }, 100);
+        }
+        
         return ()=> cleanUP();
-    }, [idx]);
+    }, [idx, isRunning]);
 
 
     useEffect(()=>{
@@ -38,12 +41,23 @@ export function useCountDown(idx: number, initialCount: number){
     },[countDown]);
 
     const cleanUP = ()=>{
-        debugger
         if(intervalRef.current){
+            setIsRunning(false);
             window.clearInterval(intervalRef.current);
             intervalRef.current = undefined
         }
     }
 
-    return countDown;
+    const startTimer= (count?:number)=>{
+        setCoutDown(count ?? initialCount);
+        setIsRunning(true);
+    }
+
+    return {
+        countDown,
+        isRunning,
+        stop:cleanUP,
+        start:startTimer,
+
+    };
 }
