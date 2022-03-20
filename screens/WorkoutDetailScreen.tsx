@@ -51,7 +51,7 @@ export default function WorkoutDetailScreen({navigation, route}: navigation){
         if(countDown === 0){
             addItemToSequence(trackerIdx+1)
         }
-    },[countDown])
+    },[countDown]);
 
 
     const hasReachedEnd = sequence.length === workoutDetails?.sequence.length &&
@@ -106,20 +106,46 @@ export default function WorkoutDetailScreen({navigation, route}: navigation){
 
                     </View>
                 </MyModal>
-                <View style={styles.centerView}>
-                    {   
-                        //when sequence lenght is 0 means Execise is going on, Only then Show the Play Button
-                        sequence.length ===0  &&
+                <View style={styles.counterUI}>
+                    <View style={styles.counterItem}>
+                        {   
+                            //when sequence lenght is 0 means Execise is going on, Only then Show the Play Button
+                            sequence.length ===0 ?
 
-                        <FontAwesome
-                            name='play-circle-o'
-                            size={100}
-                            onPress={()=> addItemToSequence(0)}
-                        />
-                    }
+                            <FontAwesome
+                                name='play-circle-o'
+                                size={100}
+                                onPress={()=> addItemToSequence(0)}
+                            />
+                            :
+
+                            //when the timer in running
+                            isRunning ?
+
+                            <FontAwesome
+                                name='stop-circle-o'
+                                size={100}
+                                onPress={()=> stop()}
+                            />
+                            :
+                            //when timer in stopped, resume timer
+                            <FontAwesome
+                                name='play-circle-o'
+                                size={100}
+                                onPress={()=> {
+                                    if(hasReachedEnd){
+                                        addItemToSequence(0);
+                                    }else{
+                                        start(countDown)
+                                    }                                    
+                                }}
+                            />
+                        }
+                    </View>
+
                     {
                         sequence.length > 0 && countDown>=0 &&
-                        <View>
+                        <View style={styles.counterItem}>
                             <Text style={{fontSize:55}}>
                                 {countDown}
                             </Text>
@@ -157,10 +183,14 @@ const styles = StyleSheet.create({
         marginBottom:20,
         fontWeight:'bold',
     },
-    centerView:{
+    counterUI:{
         flexDirection:"row",
         justifyContent:"space-around",
         alignItems:"center",
         marginBottom:20,
+    },
+    counterItem:{
+        flex:1,
+        alignItems:'center',
     }
 })
