@@ -24,6 +24,8 @@ type navigation = NativeStackHeaderProps & DetailsParams
 
 export default function WorkoutDetailScreen({navigation, route}: navigation){ 
 
+    const displaySeqence = ['3','2','1','GO'].reverse();
+
     const workoutDetails = useWorkoutDetailsBySlug(route.params.slug);
     const [sequence, setSequence] = useState<Sequence[]>([]);
     const [trackerIdx, setTrackerIdx] = useState(-1);
@@ -31,10 +33,17 @@ export default function WorkoutDetailScreen({navigation, route}: navigation){
     const {countDown, isRunning, stop, start} = useCountDown(trackerIdx);
 
     const addItemToSequence = (idx: number)=>{
-        const newSequence = [...sequence, workoutDetails!.sequence[idx]] 
+        let newSequence = [];
+
+        if(idx>0){
+            newSequence = [...sequence, workoutDetails!.sequence[idx]] 
+        }else{
+            newSequence = [workoutDetails!.sequence[idx]]; 
+        }
+
         setSequence(newSequence);
         setTrackerIdx(idx);
-        start(newSequence[idx].duration);
+        start(newSequence[idx].duration + displaySeqence.length);
     };
 
     useEffect(()=>{
@@ -73,6 +82,7 @@ export default function WorkoutDetailScreen({navigation, route}: navigation){
 
                         <View>
                             <WorkoutItem
+                            
                                 item={workoutDetails}
                             />
                             <Button
@@ -106,64 +116,75 @@ export default function WorkoutDetailScreen({navigation, route}: navigation){
 
                     </View>
                 </MyModal>
-                <View style={styles.counterUI}>
-                    <View style={styles.counterItem}>
-                        {   
-                            //when sequence lenght is 0 means Execise is going on, Only then Show the Play Button
-                            sequence.length ===0 ?
 
-                            <FontAwesome
-                                name='play-circle-o'
-                                size={100}
-                                onPress={()=> addItemToSequence(0)}
-                            />
-                            :
+                <View style={styles.wrapperView}>
+                    <View style={styles.counterUI}>
 
-                            //when the timer in running
-                            isRunning ?
+                        <View style={styles.counterItem}>
+                            {   
+                                //when sequence lenght is 0 means Execise is going on, Only then Show the Play Button
+                                sequence.length ===0 ?
 
-                            <FontAwesome
-                                name='stop-circle-o'
-                                size={100}
-                                onPress={()=> stop()}
-                            />
-                            :
-                            //when timer in stopped, resume timer
-                            <FontAwesome
-                                name='play-circle-o'
-                                size={100}
-                                onPress={()=> {
-                                    if(hasReachedEnd){
-                                        addItemToSequence(0);
-                                    }else{
-                                        start(countDown)
-                                    }                                    
-                                }}
-                            />
+                                <FontAwesome
+                                    name='play-circle-o'
+                                    size={100}
+                                    onPress={()=> addItemToSequence(0)}
+                                />
+                                :
+
+                                //when the timer in running
+                                isRunning ?
+
+                                <FontAwesome
+                                    name='stop-circle-o'
+                                    size={100}
+                                    onPress={()=> stop()}
+                                />
+                                :
+                                //when timer in stopped, resume timer
+                                <FontAwesome
+                                    name='play-circle-o'
+                                    size={100}
+                                    onPress={()=> {
+                                        if(hasReachedEnd){
+                                            addItemToSequence(0);
+                                        }else{
+                                            start(countDown)
+                                        }                                    
+                                    }}
+                                />
+                            }
+                        </View>
+
+                        {
+                            sequence.length > 0 && countDown>=0 &&
+                            <View style={styles.counterItem}>
+                                <Text style={{fontSize:55}}>
+                                    {
+                                        countDown > sequence[trackerIdx].duration
+                                        ?
+                                        displaySeqence[countDown - sequence[trackerIdx].duration -1]
+                                        :
+                                        countDown
+                                    }
+                                </Text>
+                            </View>
                         }
                     </View>
 
-                    {
-                        sequence.length > 0 && countDown>=0 &&
-                        <View style={styles.counterItem}>
-                            <Text style={{fontSize:55}}>
-                                {countDown}
-                            </Text>
-                        </View>
-                    }
-                </View>
-                <View style={{alignItems:'center'}}>
-                    <Text style={{fontSize:50}}>
-                        {
-                            sequence.length ===0?
-                            "Prepare"
-                            :
-                            hasReachedEnd?
-                            "Good Job"
-                            :
-                            sequence[trackerIdx].name
-                        }
-                    </Text>
+                    <View style={{alignItems:'center'}}>
+                        <Text style={{fontSize:50}}>
+                            {
+                                sequence.length ===0?
+                                "Prepare"
+                                :
+                                hasReachedEnd?
+                                "Good Job"
+                                :
+                                sequence[trackerIdx].name
+                            }
+                        </Text>
+                    </View>
                 </View>
             </View>
         </>
@@ -192,5 +213,12 @@ const styles = StyleSheet.create({
     counterItem:{
         flex:1,
         alignItems:'center',
+    },
+    wrapperView:{
+        marginTop:20,
+        borderColor: 'rgba(0,0,0,0.1)',
+        padding:10,
+        marginBottom:10,
+        backgroundColor:'#ffffff'
     }
 })

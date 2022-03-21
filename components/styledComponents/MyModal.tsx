@@ -26,18 +26,20 @@ export function MyModal({activator: Activator, children}: modalProps){
 
             >
                 <View style={styles.centeredView}>
+                    <View style={styles.cur}>
                     
-                    {/* this is going to passed through the props */}
-                    {children}
+                        {/* this is going to passed through the props */}
+                        {children}
 
-                    <Pressable>
-                        <Button
-                            onPress={()=>setvisibleModal(false)}
-                            title="CLOSE"
-                        >
+                        <Pressable>
+                            <Button
+                                onPress={()=>setvisibleModal(false)}
+                                title="CLOSE"
+                            >
 
-                        </Button>
-                    </Pressable>
+                            </Button>
+                        </Pressable>
+                    </View>
                 </View>
             </Modal>
             
@@ -70,7 +72,10 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         marginTop:20,
-        overflow:'scroll',
+    },
+    cur:{
+        backgroundColor:'red',
+        borderRadius:50,
     },
     
     modalView: {
