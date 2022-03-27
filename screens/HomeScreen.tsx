@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList, Pressable} from "react-native";
+import { View, Text, StyleSheet, FlatList, Pressable, ScrollView} from "react-native";
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import WorkoutItem from '../components/WorkoutItem';
 import { useWorkouts } from '../hooks/useWorkouts';
@@ -12,8 +12,9 @@ export default function HomeScreen({navigation}: NativeStackHeaderProps){
 
     return(
 
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <FlatList
+                style={styles.flatList}
                 data={workoutData}
                 renderItem={({item})=>{
                     
@@ -30,14 +31,14 @@ export default function HomeScreen({navigation}: NativeStackHeaderProps){
                 keyExtractor={(item)=>item.slug}
             />
             
-        </View>
+        </ScrollView>
 
     );
 }
 
 const styles = StyleSheet.create({
     container:{
-        padding: 20,
+        padding: 10,
         backgroundColor:'#ffff43',
         flex:1
     },
@@ -46,5 +47,9 @@ const styles = StyleSheet.create({
         fontSize:20,
         marginBottom:20,
         fontWeight:'bold',
+    },
+
+    flatList:{
+        marginBottom:10
     }
 })

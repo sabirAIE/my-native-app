@@ -21,25 +21,23 @@ export function MyModal({activator: Activator, children}: modalProps){
             <Modal
                 visible={visibleModal}
                 animationType="slide"
-                transparent={true}
+                transparent={false}
                 style={styles.modalView}
 
             >
                 <View style={styles.centeredView}>
-                    <View style={styles.cur}>
                     
-                        {/* this is going to passed through the props */}
-                        {children}
+                    {/* this is going to passed through the props */}
+                    {children}
 
-                        <Pressable>
-                            <Button
-                                onPress={()=>setvisibleModal(false)}
-                                title="CLOSE"
-                            >
+                    <Pressable>
+                        <Button
+                            onPress={()=>setvisibleModal(false)}
+                            title="CLOSE"
+                        >
 
-                            </Button>
-                        </Pressable>
-                    </View>
+                        </Button>
+                    </Pressable>
                 </View>
             </Modal>
             
