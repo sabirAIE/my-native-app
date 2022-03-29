@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput, Button, Pressable, TouchableOpacity } from "react-native";
-
+import { useForm, Controller } from "react-hook-form";
 
 
 export type ExcersiseForm = {
     name:string,
-    duration:string
+    duration:string,
+    type:string,
+    reps:string
 }
 
 type WorkoutFormData = {
@@ -14,39 +16,121 @@ type WorkoutFormData = {
 
 export default function WorkoutForm({onFormSubmit}:WorkoutFormData){
 
-    const [form, setForm] = useState({
-        name:'',
-        duration:''
-    })
+    const {control, handleSubmit} = useForm();
 
-    const onChangeForm = (name:string) =>(text:string)=>{
-        setForm({
-            ...form,
-            [name]:text
-        })
-    }
+    const [isSelectOn, setIsSelectOn] = useState(false);
+
+    const exTypes = ['Exercise', 'Strech','Break'];
+    
     return (
         <View style={styles.container}>
             <View style={styles.cotext}>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={onChangeForm('name')}
-                    value={form.name}
-                />
+                
+                <View style={styles.rowController}>
+                    <Controller
+                        control={control}
+                        rules={{
+                            required:true
+                        }}
+                        name="name"
+                        defaultValue=''
+                        render={({field})=>
+                            <TextInput
+                                onChangeText={field.onChange}
+                                value={field.value}
+                                style={styles.input}
+                                placeholder="Exercise Name"
+                            />
+                        }
+                    />
 
-                <TextInput
-                    style={styles.input}
-                    onChangeText={onChangeForm('duration')}
-                    value={form.duration}
-                    keyboardType="numeric"
-                />
+                    <Controller
+                        control={control}
+                        rules={{
+                            required:true
+                        }}
+                        name="duration"
+                        defaultValue=''
+                        render={({field})=>
+                            <TextInput
+                                onChangeText={field.onChange}
+                                value={field.value}
+                                style={styles.input}
+                                placeholder="Exercise Duration"
+                            />
+                        }
+                    />
+                </View>
+                <View style={styles.rowController}>
+                    <Controller
+                        control={control}
+                        rules={{
+                            required:true
+                        }}
+                        name="type"
+                        defaultValue=''
+                        render={({field})=>
+                            <View>
+                                {
+                                    isSelectOn ?
+                                    
+                                    <View style={{flex:1}}>
+                                        {
+                                            exTypes.map((type,i)=>(
+                                                <Pressable
+                                                    key={i}
+                                                    onPress={()=>{
+                                                        field.onChange(type);
+                                                        setIsSelectOn(false)
+                                                    }}
+                                                    style={{marginBottom:5, backgroundColor:'red', padding:4}}
+                                                >
+                                                    <Text>{type}</Text>
+                                                </Pressable>
+                                            ))
+                                        }
+                                        
+                                    </View>
 
+                                    :
+
+                                    <TextInput
+                                        onFocus={()=>setIsSelectOn(true)}
+                                        value={field.value}
+                                        style={styles.input}
+                                        placeholder="Exercise Type"
+                                    />
+                                }
+                            </View>
+                        }
+                    />
+
+                    <Controller
+                        control={control}
+                        rules={{
+                            required:false
+                        }}
+                        name="reps"
+                        defaultValue=''
+                        render={({field})=>
+                            <TextInput
+                                onChangeText={field.onChange}
+                                value={field.value}
+                                style={styles.input}
+                                placeholder="Number of reps"
+                            />
+                        }
+                    />
+                </View>
                 <TouchableOpacity
                     style={styles.buttonStyle}
-                    onPress={() => onFormSubmit(form)}
+                    onPress={handleSubmit((data)=>{
+                        onFormSubmit(data as ExcersiseForm);
+                    })}
                 >
-                    <Text style={styles.appButtonText} >Save</Text>
+                    <Text style={styles.appButtonText} >Add</Text>
                 </TouchableOpacity>
+
             </View>
         </View>
     );
@@ -62,12 +146,13 @@ const styles = StyleSheet.create({
     },
 
     input: {
+        flex:1,
         height: 40,
         borderWidth: 0.5,
         margin:10,
         padding:10,
-        borderRadius:10
     },
+
     buttonStyle:{
         elevation: 8,
         backgroundColor: "green",
@@ -91,5 +176,9 @@ const styles = StyleSheet.create({
         padding:10,
         margin:20,
         color:'#fff'
+    },
+    rowController:{
+        flexDirection:'row',
+        flexWrap:'wrap'
     }
 })

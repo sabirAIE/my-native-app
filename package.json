@@ -24,7 +24,8 @@
     "react-native-input-style": "^1.0.2",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.10.1",
-    "react-native-web": "0.17.1"
+    "react-native-web": "0.17.1",
+    "slugify": "^1.6.5"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
