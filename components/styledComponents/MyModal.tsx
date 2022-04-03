@@ -9,12 +9,20 @@ type modalProps = {
         }
     >,
 
-    children: React.ReactNode,
+    children: FunctionComponent<
+        {
+            handleOpen:()=>void,
+            handleClose:()=>void,
+        }
+    >,
 }
 
 export function MyModal({activator: Activator, children}: modalProps){
 
     const [visibleModal, setvisibleModal] = useState(false);
+
+    const handleClose = ()=> setvisibleModal(false);
+    const handleOpen =  ()=>setvisibleModal(true);
 
     return(
         <View>
@@ -28,11 +36,11 @@ export function MyModal({activator: Activator, children}: modalProps){
                 <View style={styles.centeredView}>
                     
                     {/* this is going to passed through the props */}
-                    {children}
+                    {children({handleClose, handleOpen})}
 
                     <Pressable>
                         <Button
-                            onPress={()=>setvisibleModal(false)}
+                            onPress={handleClose}
                             title="CLOSE"
                         >
 
@@ -47,14 +55,14 @@ export function MyModal({activator: Activator, children}: modalProps){
 
                     //handle this
                     <Activator
-                        handleOpen={()=>setvisibleModal(true)}
+                        handleOpen={handleOpen}
                     />
                     
                     :
 
                     //if not passed set default component
                     <Pressable
-                        onPress={()=>setvisibleModal(true)}
+                        onPress={handleOpen}
                     >
                         <Text>Open Modal</Text>
                     </Pressable>    
@@ -80,7 +88,7 @@ const styles = StyleSheet.create({
         margin: 20,
         backgroundColor: "white",
         borderRadius: 20,
-        padding: 35,
+        padding: 20,
         alignItems: "center",
         shadowColor: "#000",
         shadowOffset: {

@@ -93,28 +93,30 @@ export default function WorkoutDetailScreen({navigation, route}: navigation){
                     }
                 >
                 
-                    <View>
+                    {()=>
+                        <View>
 
-                        {workoutDetails.sequence.map((data,i)=>(
-                            <View key={i}>
-                                <Pressable
-                                    style={{padding:20, backgroundColor:'#fff', marginBottom:10}}
-                                    onPress={()=>alert("Hi")}
-                                >
-                                    <Text style={{textTransform:'capitalize', fontWeight:'bold'}}>{data.type}</Text>
-                                    <Text>
-                                        Exsercise Name: {data.name}
-                                    </Text>
-                                    <Text>
-                                        Reps: {data.reps}, Duration: {formatSec(data.duration)}
-                                    </Text>
-                                    
-                                </Pressable>
-                            </View>
+                            {workoutDetails.sequence.map((data,i)=>(
+                                <View key={i}>
+                                    <Pressable
+                                        style={{padding:20, backgroundColor:'#fff', marginBottom:10}}
+                                        onPress={()=>alert("Hi")}
+                                    >
+                                        <Text style={{textTransform:'capitalize', fontWeight:'bold'}}>{data.type}</Text>
+                                        <Text>
+                                            Exsercise Name: {data.name}
+                                        </Text>
+                                        <Text>
+                                            Reps: {data.reps}, Duration: {formatSec(data.duration)}
+                                        </Text>
+                                        
+                                    </Pressable>
+                                </View>
 
-                        ))}
+                            ))}
 
-                    </View>
+                        </View>
+                    }
                 </MyModal>
 
                 <View style={styles.wrapperView}>
@@ -195,7 +197,6 @@ export default function WorkoutDetailScreen({navigation, route}: navigation){
 const styles = StyleSheet.create({
     container:{
         padding: 20,
-        backgroundColor:'#ffff43',
         flex:1
     },
 

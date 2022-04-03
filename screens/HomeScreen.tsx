@@ -4,6 +4,7 @@ import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import WorkoutItem from '../components/WorkoutItem';
 import { useWorkouts } from '../hooks/useWorkouts';
 import useCachedResources from '../hooks/useCachedResources';
+import { MyText } from '../components/styledComponents/MyText';
 
 
 export default function HomeScreen({navigation}: NativeStackHeaderProps){
@@ -13,6 +14,9 @@ export default function HomeScreen({navigation}: NativeStackHeaderProps){
     return(
 
         <ScrollView style={styles.container}>
+            <View>
+                <MyText style={{fontWeight:"bold", paddingBottom:10}}>Your Workouts</MyText>
+            </View>
             <FlatList
                 style={styles.flatList}
                 data={workoutData}
@@ -39,7 +43,6 @@ export default function HomeScreen({navigation}: NativeStackHeaderProps){
 const styles = StyleSheet.create({
     container:{
         padding: 10,
-        backgroundColor:'#ffff43',
         flex:1
     },
 
