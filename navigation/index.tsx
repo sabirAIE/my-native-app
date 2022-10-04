@@ -3,6 +3,7 @@ import { ColorSchemeName } from 'react-native';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 import {NavigationContainer, DarkTheme, DefaultTheme} from "@react-navigation/native"
 
 import HomeScreen from "../screens/HomeScreen";

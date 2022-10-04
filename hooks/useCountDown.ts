@@ -21,7 +21,7 @@ export function useCountDown(idx: number, initialCount: number=-1){
                     return counter - 1;
                 });
     
-            }, 50);
+            }, 1000);
         }
         
         return ()=> cleanUP();
